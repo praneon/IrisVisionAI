@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Environments
+envs/
+.conda/
+.venv/
+
+# Data (never commit real datasets)
+data/raw/*
+data/working/*
+!data/raw/.gitkeep
+!data/working/.gitkeep
+
+# Models & outputs
+models/*
+outputs/*
+runs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
