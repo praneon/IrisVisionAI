@@ -1,17 +1,16 @@
-# IrisVisionAI – Global Path Contracts (v0.1)
+# IrisVisionAI – Global Path Contracts (v0.2)
 
 datasets:
-  casia_root: /data/workspace/datasets/CASIA-IrisV4
-  polyu_root: /data/workspace/datasets/PolyU
+  casia_interval_root: /data/workspace/infra/datasets/casia/casia_interval
 
 nnunet:
-  raw: /data/workspace/nnunet
-  preprocessed: /data/workspace/nnunet_preprocessed
-  results: /data/workspace/nnunet_results
+  raw: /data/workspace/infra/frameworks/nnunet/raw
+  preprocessed: /data/workspace/infra/frameworks/nnunet/preprocessed
+  results: /data/workspace/infra/frameworks/nnunet/results
 
 project:
   repo_root: /data/workspace/projects/IrisVisionAI
-  working_data: /data/workspace/projects/IrisVisionAI/data/working
+  working_data: /data/workspace/projects/IrisVisionAI/data/working  # v0.3+
   annotations: /data/workspace/projects/IrisVisionAI/data/annotations
   outputs: /data/workspace/projects/IrisVisionAI/outputs
- 
+

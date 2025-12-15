@@ -110,43 +110,31 @@ Dataset → Annotation → Segmentation → Detection → Sector Mapping → Int
 
 ---
 
-# 📁 Folder Structure
+## 📁 Repository Structure
+
 ```text
-IrisVisionAI/
-├── configs/
-├── data/
-│   ├── raw/
-│   ├── working/
-│   │   ├── images/
-│   │   ├── masks/
-│   ├── annotations/
-│   │   ├── yolo_labels/
-│   │   └── coco_segmentation.json
-│   └── metadata.csv
+workspace/
+├── infra/                  # Infrastructure and supporting systems
+│   ├── backups/
+│   ├── datasets/
+│   ├── environments/
+│   ├── frameworks/
+│   │   └── nnunet/
+│   ├── logs/
+│   └── tools/
 │
-├── src/
-│   ├── preprocess/
-│   ├── annotation/
-│   ├── segmentation/
-│   ├── detection/
-│   ├── mapping/
-│   ├── interpretation/
-│   └── cli.py
-│
-├── docs/
-├── experiments/
-├── notebooks/
-├── tests/
-└── README.md
-```
-
----
-
-# 🚀 Quickstart
-```bash
-git clone https://github.com/praneon/IrisVisionAI.git
-cd IrisVisionAI
-pip install -r requirements.txt
+└── projects/
+    └── IrisVisionAI/       # Main research repository
+        ├── configs/
+        ├── data/
+        ├── docs/
+        ├── experiments/
+        ├── models/
+        ├── notebooks/
+        ├── outputs/
+        ├── src/
+        ├── tests/
+        └── README.md
 ```
 
 ---
@@ -167,104 +155,147 @@ All documentation is inside `/docs`:
 
 # 📌 VERSION CHECKLIST (TABLE + CHECKBOXES)
 
-# ✅ v0.1 – Project Initialization (Table)
+# ✅ v0.1 – Project Initialization (Complete)
+
 | Task | Progress |
 |------|----------|
-| Create repo structure | ✔ |
-| Add README + docs | ✔ |
-| Add .gitignore | ✔ |
-| Add requirements + Dockerfile | ✔ |
-| Commit base project | ✔ |
+| Define project scope & research intent | ✔ |
+| Create repo & folder structure | ✔ |
+| Infra vs project separation | ✔ |
+| Add README + core docs | ✔ |
+| Add license, disclaimer, security | ✔ |
+| Environment & tooling setup | ✔ |
 
 ---
 
-# ✅ v0.2 – Dataset Preparation
+# ✅ v0.2 – Dataset Preparation (ACTIVE)
 
+### Dataset Scope & Policy
 | Task | Progress |
 |------|----------|
-| Request dataset | ✔ |
-| Add raw data | |
-| Crop images | |
-| Run QC | |
-| Create metadata.csv | |
-| Train/val/test split | |
+| Select primary dataset (CASIA-Iris-Interval) | ✔ |
+| Lock dataset for v0.2 | ✔ |
+| Archive non-primary datasets | ✔ |
+
+### Dataset Ingestion
+| Task | Progress |
+|------|----------|
+| Download dataset | ✔ |
+| Store raw data (unmodified) | ✔ |
+| Verify directory consistency | ✔ |
+
+### Dataset Audit
+| Task | Progress |
+|------|----------|
+| Count total images | ✔ | - #Check Metadata for more info
+| Inspect subject-wise structure | ✔ |
+| Verify resolution & format | ✔ |
+| Document filename conventions | ✔ |
+
+### Quality Control (QC)
+| Task | Progress |
+|------|----------|
+| Detect corrupted images | ✔ |
+| Flag blur / occlusion | ✔ |
+| Log exclusions | ✔ |
+
+### Dataset Splits
+| Task | Progress |
+|------|----------|
+| Subject-disjoint train/val/test split | ✔ |
+| Fixed random seed | ✔ |
+| Save split manifest | ✔ |
+
+### Metadata
+| Task | Progress |
+|------|----------|
+| Define metadata schema | ✔ |
+| Generate metadata.csv | ✔ |
+| Include split & QC flags | ✔ |
+
+### nnU-Net Readiness
+| Task | Progress |
+|------|----------|
+| Create Task001_IrisSeg structure | ⏳ |
+| Copy curated images (no labels) | ⏳ |
+| Verify nnU-Net preprocessing | ⏳ |
 
 ---
 
-# ✅ v0.3 – Segmentation Annotation (SAM + CVAT)
+# 🟡 v0.3 – Segmentation Annotation (SAM + CVAT)
 
 | Task | Progress |
 |------|----------|
+| Define annotation protocol | |
 | Generate SAM proposals | |
-| CVAT corrections | |
-| Annotate iris/pupil/collarette/furrows | |
-| Export COCO | |
-| Save masks | |
+| Manual correction in CVAT | |
+| Annotate iris / pupil / collarette / furrows | |
+| Export COCO segmentation | |
+| Save final masks | |
 
 ---
 
-# v0.4 – Segmentation Model (nnU-Net)
+# ⏳ v0.4 – Segmentation Model (nnU-Net)
 
 | Task | Progress |
 |------|----------|
-| Convert COCO → nnU-Net | |
-| Train model | |
-| Validate metrics | |
-| Save checkpoint | |
+| Convert dataset → nnU-Net format | |
+| Train nnU-Net model | |
+| Validate Dice / metrics | |
+| Save checkpoints | |
 
 ---
 
-# v0.5 – Micro-feature Annotation (YOLO)
+# ⏳ v0.5 – Micro-feature Annotation (YOLO)
 
 | Task | Progress |
 |------|----------|
-| Annotate lacunae | |
-| Annotate crypts | |
-| Annotate patches | |
+| Define lacuna / crypt labels | |
+| Annotate micro-features | |
 | Export YOLO labels | |
 
 ---
 
-# v0.6 – Detection Model Training
+# ⏳ v0.6 – Detection Model Training
 
 | Task | Progress |
 |------|----------|
-| Train YOLOv8/10 | |
+| Train YOLOv8/YOLOv10 | |
 | Evaluate AP | |
-| Fix labels & retrain | |
-| Save weights | |
+| Error analysis & relabel | |
+| Save final weights | |
 
 ---
 
-# v0.7 – Sector Mapping Engine
+# ⏳ v0.7 – Sector Mapping Engine
 
 | Task | Progress |
 |------|----------|
 | Iris center extraction | |
-| Implement polar transform | |
-| Define sectors | |
-| Map detections | |
+| Polar transformation | |
+| Sector definition (12 / 24) | |
+| Map detections to sectors | |
 
 ---
 
-# v0.8 – Rule-Based Interpretation
+# ⏳ v0.8 – Rule-Based Interpretation
 
 | Task | Progress |
 |------|----------|
-| Build rules.json | |
-| Implement rule_based.py | |
-| Generate structural text | |
+| Define structural rules | |
+| Implement rule engine | |
+| Generate textual summaries | |
 
 ---
 
-# v0.9 – VLM Interpretation
+# ⏳ v0.9 – VLM Interpretation
 
 | Task | Progress |
 |------|----------|
 | Select VLM | |
-| Create prompt templates | |
-| Generate explanations | |
-| Merge with rule-based | |
+| Define prompt templates | |
+| Generate natural-language explanations | |
+| Merge with rule-based output | |
 
 ---
 
@@ -275,7 +306,7 @@ All documentation is inside `/docs`:
 | Full pipeline runner | |
 | Visual overlays | |
 | JSON + PDF report | |
-| Final test | |
+| End-to-end validation | |
 
 ---
 
