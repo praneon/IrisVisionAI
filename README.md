@@ -155,158 +155,212 @@ All documentation is inside `/docs`:
 
 # 📌 VERSION CHECKLIST (TABLE + CHECKBOXES)
 
-# ✅ v0.1 – Project Initialization (Complete)
+Perfect — thank you for being precise about the **format**.
+Below is the **corrected, authoritative roadmap**, **in the exact same structure and style you used**, but **scientifically aligned** with everything you’ve executed and learned.
 
-| Task | Progress |
-|------|----------|
+You can **directly replace** your existing roadmap with this.
+
+---
+
+# IrisVisionAI — Project Roadmap & Version Protocol
+
+This roadmap defines **strict version boundaries** for the IrisVisionAI research pipeline.  
+Each version authorizes **exactly one class of irreversible actions**.
+
+---
+
+## v0.1 — Project Initialization (Complete)
+
+| Task | Status |
+|------|--------|
 | Define project scope & research intent | ✔ |
-| Create repo & folder structure | ✔ |
+| Create repository & folder structure | ✔ |
 | Infra vs project separation | ✔ |
-| Add README + core docs | ✔ |
-| Add license, disclaimer, security | ✔ |
+| Add README & core documentation | ✔ |
+| Add license, disclaimer, security policy | ✔ |
 | Environment & tooling setup | ✔ |
 
 ---
 
-# ✅ v0.2 – Dataset Preparation (ACTIVE)
+## v0.2 — Dataset Preparation & Audit (Complete)
 
 ### Dataset Scope & Policy
-| Task | Progress |
-|------|----------|
+| Task | Status |
+|------|--------|
 | Select primary dataset (CASIA-Iris-Interval) | ✔ |
-| Lock dataset for v0.2 | ✔ |
+| Lock dataset | ✔ |
 | Archive non-primary datasets | ✔ |
 
 ### Dataset Ingestion
-| Task | Progress |
-|------|----------|
+| Task | Status |
+|------|--------|
 | Download dataset | ✔ |
 | Store raw data (unmodified) | ✔ |
 | Verify directory consistency | ✔ |
 
 ### Dataset Audit
-| Task | Progress |
-|------|----------|
-| Count total images | ✔ | - #Check Metadata for more info
+| Task | Status |
+|------|--------|
+| Count total images | ✔ |
 | Inspect subject-wise structure | ✔ |
 | Verify resolution & format | ✔ |
 | Document filename conventions | ✔ |
 
 ### Quality Control (QC)
-| Task | Progress |
-|------|----------|
+| Task | Status |
+|------|--------|
 | Detect corrupted images | ✔ |
 | Flag blur / occlusion | ✔ |
 | Log exclusions | ✔ |
 
-### Dataset Splits
-| Task | Progress |
-|------|----------|
-| Subject-disjoint train/val/test split | ✔ |
-| Fixed random seed | ✔ |
-| Save split manifest | ✔ |
-
 ### Metadata
-| Task | Progress |
-|------|----------|
+| Task | Status |
+|------|--------|
 | Define metadata schema | ✔ |
 | Generate metadata.csv | ✔ |
-| Include split & QC flags | ✔ |
+| Include QC flags | ✔ |
 
-### nnU-Net Readiness
-| Task | Progress |
-|------|----------|
-| Create Task001_IrisSeg structure | ⏳ |
-| Copy curated images (no labels) | ⏳ |
-| Verify nnU-Net preprocessing | ⏳ |
+**Restrictions**
+- No dataset splitting  
+- No annotation  
+- No model training  
 
 ---
 
-# 🟡 v0.3 – Segmentation Annotation (SAM + CVAT)
+## v0.3 — Dataset Split & Annotation Readiness (Complete)
 
-| Task | Progress |
-|------|----------|
-| Define annotation protocol | |
-| Generate SAM proposals | |
-| Manual correction in CVAT | |
-| Annotate iris / pupil / collarette / furrows | |
-| Export COCO segmentation | |
-| Save final masks | |
+### Dataset Splits
+| Task | Status |
+|------|--------|
+| Subject-disjoint train/val/test split | ✔ |
+| Fixed random seed (69) | ✔ |
+| Save split manifest | ✔ |
+| Generate split summary | ✔ |
 
----
+### Metadata Finalization
+| Task | Status |
+|------|--------|
+| Populate `split` column | ✔ |
+| Preserve QC flags | ✔ |
 
-# ⏳ v0.4 – Segmentation Model (nnU-Net)
+### Structural Readiness
+| Task | Status |
+|------|--------|
+| Prepare split-aware folder structure | ✔ |
+| Write SPLITS.md documentation | ✔ |
+| Explicitly defer annotation | ✔ |
 
-| Task | Progress |
-|------|----------|
-| Convert dataset → nnU-Net format | |
-| Train nnU-Net model | |
-| Validate Dice / metrics | |
-| Save checkpoints | |
-
----
-
-# ⏳ v0.5 – Micro-feature Annotation (YOLO)
-
-| Task | Progress |
-|------|----------|
-| Define lacuna / crypt labels | |
-| Annotate micro-features | |
-| Export YOLO labels | |
+**Split is frozen permanently from this version onward.**
 
 ---
 
-# ⏳ v0.6 – Detection Model Training
+## v0.4 — Segmentation Annotation (SAM + CVAT)
 
-| Task | Progress |
-|------|----------|
-| Train YOLOv8/YOLOv10 | |
-| Evaluate AP | |
-| Error analysis & relabel | |
-| Save final weights | |
+| Task | Status |
+|------|--------|
+| Define annotation protocol | ✔ |
+| Generate SAM proposals (assistive only) | ⏳ |
+| Manual correction in CVAT | ⏳ |
+| Annotate iris / pupil / occlusions | ⏳ |
+| QA review (subset) | ⏳ |
+| Export COCO segmentation | ⏳ |
+| Save final masks | ⏳ |
 
----
-
-# ⏳ v0.7 – Sector Mapping Engine
-
-| Task | Progress |
-|------|----------|
-| Iris center extraction | |
-| Polar transformation | |
-| Sector definition (12 / 24) | |
-| Map detections to sectors | |
+**Restrictions**
+- No model training  
 
 ---
 
-# ⏳ v0.8 – Rule-Based Interpretation
+## v0.5 — Segmentation Model Training (nnU-Net)
 
-| Task | Progress |
-|------|----------|
-| Define structural rules | |
-| Implement rule engine | |
-| Generate textual summaries | |
-
----
-
-# ⏳ v0.9 – VLM Interpretation
-
-| Task | Progress |
-|------|----------|
-| Select VLM | |
-| Define prompt templates | |
-| Generate natural-language explanations | |
-| Merge with rule-based output | |
+| Task | Status |
+|------|--------|
+| Convert dataset to nnU-Net format | ⏳ |
+| Verify preprocessing | ⏳ |
+| Train nnU-Net model | ⏳ |
+| Validate Dice / IoU metrics | ⏳ |
+| Save checkpoints & configs | ⏳ |
 
 ---
 
-# ⭐ v1.0 – Alpha Release (Complete Pipeline)
+## v0.6 — Micro-feature Annotation (YOLO)
 
-| Task | Progress |
-|------|----------|
-| Full pipeline runner | |
-| Visual overlays | |
-| JSON + PDF report | |
-| End-to-end validation | |
+| Task | Status |
+|------|--------|
+| Define lacuna / crypt taxonomy | ⏳ |
+| Annotate micro-features | ⏳ |
+| Export YOLO labels | ⏳ |
+| QA pass | ⏳ |
+
+---
+
+## v0.7 — Detection Model Training
+
+| Task | Status |
+|------|--------|
+| Train YOLOv8 / YOLOv10 | ⏳ |
+| Evaluate AP / PR curves | ⏳ |
+| Error analysis | ⏳ |
+| Relabel if needed | ⏳ |
+| Save final weights | ⏳ |
+
+---
+
+## v0.8 — Sector Mapping Engine
+
+| Task | Status |
+|------|--------|
+| Iris center extraction | ⏳ |
+| Polar transformation | ⏳ |
+| Sector definition (12 / 24) | ⏳ |
+| Map detections to sectors | ⏳ |
+
+---
+
+## v0.9 — Rule-Based Interpretation
+
+| Task | Status |
+|------|--------|
+| Define structural rules | ⏳ |
+| Implement rule engine | ⏳ |
+| Generate textual summaries | ⏳ |
+| Validate consistency | ⏳ |
+
+---
+
+## v0.10 — VLM Interpretation (Explanation Only)
+
+| Task | Status |
+|------|--------|
+| Select VLM | ⏳ |
+| Define prompt templates | ⏳ |
+| Generate natural-language explanations | ⏳ |
+| Merge with rule-based output | ⏳ |
+
+**Restrictions**
+- No decision-making  
+- No diagnostic claims  
+
+---
+
+## v1.0 — Alpha Release (Complete Pipeline)
+
+| Task | Status |
+|------|--------|
+| End-to-end pipeline runner | ⏳ |
+| Visual overlays | ⏳ |
+| JSON & PDF reports | ⏳ |
+| Reproducibility validation | ⏳ |
+| Final documentation | ⏳ |
+
+---
+
+## Governing Rule
+
+> If a step which injects **human knowledge**, it will occur **after v0.3**.  
+> If a step which injects **machine learning**, it will occur **after annotation**.
+
+This protocol is followed methodological validity, reproducibility, and research integrity.
 
 ---
 

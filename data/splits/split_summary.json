@@ -1,0 +1,11 @@
+{
+  "seed": 69,
+  "total_subjects": 249,
+  "train_subjects": 174,
+  "val_subjects": 37,
+  "test_subjects": 38,
+  "total_images": 2639,
+  "train_images": 1810,
+  "val_images": 383,
+  "test_images": 446
+}
