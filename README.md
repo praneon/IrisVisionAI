@@ -155,13 +155,6 @@ All documentation is inside `/docs`:
 
 # 📌 VERSION CHECKLIST (TABLE + CHECKBOXES)
 
-Perfect — thank you for being precise about the **format**.
-Below is the **corrected, authoritative roadmap**, **in the exact same structure and style you used**, but **scientifically aligned** with everything you’ve executed and learned.
-
-You can **directly replace** your existing roadmap with this.
-
----
-
 # IrisVisionAI — Project Roadmap & Version Protocol
 
 This roadmap defines **strict version boundaries** for the IrisVisionAI research pipeline.  
