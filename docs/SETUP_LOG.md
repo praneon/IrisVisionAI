@@ -1,33 +1,86 @@
-# IrisVisionAI – Setup Log (v0.1)
+# IrisVisionAI — Setup Log (v0.1)
+
+This document records the **initial environment setup and infrastructure
+decisions** made during v0.1. It serves as a historical log, not an active
+instruction manual.
+
+---
 
 ## Version
-v0.1 — Infrastructure & Project Scaffold
+
+**v0.1 — Infrastructure & Project Scaffold**
+
+Status: **Frozen**
+
+---
 
 ## Environment
-- OS: Ubuntu
-- Python: 3.10
-- Conda env: irisvision
-- GPU: NVIDIA GTX 1650
-- PyTorch: CUDA-enabled
-- YOLOv8: Installed & sanity-checked
-- nnU-Net v1: Installed, configured (not trained)
-- SAM: Installed & import verified
+
+- **Operating System:** Ubuntu  
+- **Python:** 3.10  
+- **Conda Environment:** `irisvision`  
+- **GPU:** NVIDIA GTX 1650  
+- **PyTorch:** CUDA-enabled build  
+
+### Installed Frameworks & Tools
+
+- **YOLOv8**
+  - Installed
+  - Sanity-checked with test inference
+
+- **nnU-Net v1**
+  - Installed
+  - Environment configured
+  - Not trained at this stage
+
+- **SAM (Segment Anything Model)**
+  - Installed
+  - Imports and basic usage verified
+
+No training or dataset-dependent execution occurred in v0.1.
+
+---
 
 ## Folder Strategy
-- Conda & runtimes: /data/workspace/envs
-- nnU-Net workspaces: /data/workspace/nnunet*
-- Datasets (external): /data/workspace/datasets
-- Project repo: /data/workspace/projects/IrisVisionAI
+
+The workspace was intentionally split to separate **private infrastructure**
+from the **public project repository**.
+
+- **Conda environments & runtimes:**  
+  `/data/workspace/envs`
+
+- **nnU-Net workspaces (raw / preprocessed / results):**  
+  `/data/workspace/nnunet*`
+
+- **External datasets (licensed, non-redistributable):**  
+  `/data/workspace/datasets`
+
+- **Project repository (code & docs only):**  
+  `/data/workspace/projects/IrisVisionAI`
+
+This separation is a foundational design decision and is preserved
+through all subsequent versions.
+
+---
 
 ## Data Policy
-- No licensed datasets stored in repo
-- CASIA & PolyU referenced via configs/paths.yaml
-- Repo remains lightweight and portable
 
-## Status
-✔ Infrastructure complete  
-✔ Repo structure frozen  
-✔ Ready for v0.2 (dataset preprocessing)
+- No licensed datasets are stored in the Git repository
+- CASIA, PolyU, and other datasets are referenced indirectly via
+  `configs/paths.yaml`
+- The repository remains lightweight, portable, and legally compliant
 
-_Last updated: v0.1 freeze_
- 
+---
+
+## Status Summary
+
+- ✔ Infrastructure complete  
+- ✔ Repository structure defined and frozen  
+- ✔ Environment verified for downstream work  
+
+**Ready to proceed to v0.2 — Dataset Preparation & Audit**
+
+---
+
+_Last updated: v0.4_
+

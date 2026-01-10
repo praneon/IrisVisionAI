@@ -1,3 +1,4 @@
+```md
 <p align="center">
   <img src="banner.png" width="100%">
 </p>
@@ -7,6 +8,8 @@
 A complete scientific pipeline for **structural iris analysis** using Near-Infrared (NIR) datasets such as **CASIA-IrisV4**.  
 This repository implements segmentation, micro-feature detection, clock-sector mapping, and interpretation layers (rule-based + VLM).
 
+---
+
 # 📘 Repository Use Case — What This Project Is For
 
 This project provides a research-grade pipeline for **computational iridology**, focusing solely on **structural iris features** visible under NIR:
@@ -14,9 +17,9 @@ This project provides a research-grade pipeline for **computational iridology**,
 ### ✔ Anatomical Iris Segmentation  
 - Iris boundary  
 - Pupil boundary  
-- Collarette  
-- Contraction furrows  
-- Scurf rim  
+- Collarette *(derived, not directly segmented)*  
+- Contraction furrows *(derived / secondary)*  
+- Scurf rim *(derived / secondary)*  
 
 ### ✔ Micro-feature Detection (NIR-visible)
 - Lacunae (medium–large)
@@ -42,7 +45,7 @@ This project is meant for:
 
 - Iris biometrics research  
 - Medical imaging analysis  
-- Structural iridology research  
+- Structural iridology research *(non-diagnostic)*  
 - Feature extraction and mapping studies  
 - Building reproducible NIR iris workflows  
 
@@ -56,8 +59,9 @@ NIR offers:
 
 - High structural clarity  
 - Consistent imaging  
-- No glare/reflection  
-- BUT — removes all iris color information
+- Minimal glare/reflection  
+
+BUT — it **removes all iris color information**.
 
 Thus this project is **structural-only**, not chromatic.
 
@@ -65,14 +69,15 @@ Thus this project is **structural-only**, not chromatic.
 
 # 🧱 What This Repository Includes
 
-- Dataset prep scripts (cropper, QC)
-- SAM-assisted annotation helpers
-- CVAT annotation workflow
+- Dataset preparation scripts (crop, QC, audit)
+- Annotation protocol definitions
+- SAM-assisted annotation helpers *(assistive only)*
+- CVAT-based annotation workflow
 - nnU-Net segmentation training
-- YOLO micro-feature detection training
+- YOLO-based micro-feature detection training
 - Polar mapping + sector assignment
 - Structural interpretation engine (rule-based + VLM)
-- Full pipeline CLI
+- End-to-end pipeline CLI
 - Documentation & experiment templates
 
 ---
@@ -105,8 +110,10 @@ Given an input iris image:
 
 # 🧠 Pipeline Overview
 ```
+
 Dataset → Annotation → Segmentation → Detection → Sector Mapping → Interpretation → Reporting
-```
+
+````
 
 ---
 
@@ -135,266 +142,394 @@ workspace/
         ├── src/
         ├── tests/
         └── README.md
-```
+````
 
 ---
 
 # 📚 Documentation
+
 All documentation is inside `/docs`:
-- MODEL_OVERVIEW.md
-- ANNOTATION_SPEC.md
-- DATASET_DATASHEET.md
-- PREPROCESSING.md
-- TRAINING_RECIPES.md
-- EVALUATION.md
-- REPRODUCIBILITY.md
-- MODEL_CARD.md
-- VLM_PROMPTS.md  
+
+* MODEL_OVERVIEW.md
+* ANNOTATION_SPEC.md
+* DATASET_DATASHEET.md
+* PREPROCESSING.md
+* TRAINING_RECIPES.md
+* EVALUATION.md
+* REPRODUCIBILITY.md
+* MODEL_CARD.md
+* VLM_PROMPTS.md
+
+Each document is version-scoped and must not contradict the roadmap below.
 
 ---
 
 # 📌 VERSION CHECKLIST (TABLE + CHECKBOXES)
 
-# IrisVisionAI — Project Roadmap & Version Protocol
-
-This roadmap defines **strict version boundaries** for the IrisVisionAI research pipeline.  
 Each version authorizes **exactly one class of irreversible actions**.
 
 ---
 
 ## v0.1 — Project Initialization (Complete)
-
-| Task | Status |
-|------|--------|
-| Define project scope & research intent | ✔ |
-| Create repository & folder structure | ✔ |
-| Infra vs project separation | ✔ |
-| Add README & core documentation | ✔ |
-| Add license, disclaimer, security policy | ✔ |
-| Environment & tooling setup | ✔ |
+ Task                                     | Status |
+| ---------------------------------------- | ------ |
+| Define project scope & research intent   | ✔      |
+| Create repository & folder structure     | ✔      |
+| Infra vs project separation              | ✔      |
+| Add README & core documentation          | ✔      |
+| Add license, disclaimer, security policy | ✔      |
+| Environment & tooling setup              | ✔      |
 
 ---
 
 ## v0.2 — Dataset Preparation & Audit (Complete)
-
 ### Dataset Scope & Policy
-| Task | Status |
-|------|--------|
-| Select primary dataset (CASIA-Iris-Interval) | ✔ |
-| Lock dataset | ✔ |
-| Archive non-primary datasets | ✔ |
+
+| Task                                         | Status |
+| -------------------------------------------- | ------ |
+| Select primary dataset (CASIA-Iris-Interval) | ✔      |
+| Lock dataset                                 | ✔      |
+| Archive non-primary datasets                 | ✔      |
 
 ### Dataset Ingestion
-| Task | Status |
-|------|--------|
-| Download dataset | ✔ |
-| Store raw data (unmodified) | ✔ |
-| Verify directory consistency | ✔ |
+
+| Task                         | Status |
+| ---------------------------- | ------ |
+| Download dataset             | ✔      |
+| Store raw data (unmodified)  | ✔      |
+| Verify directory consistency | ✔      |
 
 ### Dataset Audit
-| Task | Status |
-|------|--------|
-| Count total images | ✔ |
-| Inspect subject-wise structure | ✔ |
-| Verify resolution & format | ✔ |
-| Document filename conventions | ✔ |
+
+| Task                           | Status |
+| ------------------------------ | ------ |
+| Count total images             | ✔      |
+| Inspect subject-wise structure | ✔      |
+| Verify resolution & format     | ✔      |
+| Document filename conventions  | ✔      |
 
 ### Quality Control (QC)
-| Task | Status |
-|------|--------|
-| Detect corrupted images | ✔ |
-| Flag blur / occlusion | ✔ |
-| Log exclusions | ✔ |
+
+| Task                    | Status |
+| ----------------------- | ------ |
+| Detect corrupted images | ✔      |
+| Flag blur / occlusion   | ✔      |
+| Log exclusions          | ✔      |
 
 ### Metadata
-| Task | Status |
-|------|--------|
-| Define metadata schema | ✔ |
-| Generate metadata.csv | ✔ |
-| Include QC flags | ✔ |
+
+| Task                   | Status |
+| ---------------------- | ------ |
+| Define metadata schema | ✔      |
+| Generate metadata.csv  | ✔      |
+| Include QC flags       | ✔      |
 
 **Restrictions**
-- No dataset splitting  
-- No annotation  
-- No model training  
+
+* No dataset splitting
+* No annotation
+* No model training
 
 ---
 
 ## v0.3 — Dataset Split & Annotation Readiness (Complete)
 
 ### Dataset Splits
-| Task | Status |
-|------|--------|
-| Subject-disjoint train/val/test split | ✔ |
-| Fixed random seed (69) | ✔ |
-| Save split manifest | ✔ |
-| Generate split summary | ✔ |
+
+| Task                                  | Status |
+| ------------------------------------- | ------ |
+| Subject-disjoint train/val/test split | ✔      |
+| Fixed random seed (69)                | ✔      |
+| Save split manifest                   | ✔      |
+| Generate split summary                | ✔      |
 
 ### Metadata Finalization
-| Task | Status |
-|------|--------|
-| Populate `split` column | ✔ |
-| Preserve QC flags | ✔ |
+
+| Task                    | Status |
+| ----------------------- | ------ |
+| Populate `split` column | ✔      |
+| Preserve QC flags       | ✔      |
 
 ### Structural Readiness
-| Task | Status |
-|------|--------|
-| Prepare split-aware folder structure | ✔ |
-| Write SPLITS.md documentation | ✔ |
-| Explicitly defer annotation | ✔ |
+
+| Task                                 | Status |
+| ------------------------------------ | ------ |
+| Prepare split-aware folder structure | ✔      |
+| Write SPLITS.md documentation        | ✔      |
+| Explicitly defer annotation          | ✔      |
 
 **Split is frozen permanently from this version onward.**
 
 ---
+## v0.4 — Annotation Protocol Validation (PILOT) **[LOCKED]**
 
-## v0.4 — Segmentation Annotation (SAM + CVAT)
+### Purpose
 
-| Task | Status |
-|------|--------|
-| Define annotation protocol | ✔ |
-| Generate SAM proposals (assistive only) | ⏳ |
-| Manual correction in CVAT | ⏳ |
-| Annotate iris / pupil / occlusions | ⏳ |
-| QA review (subset) | ⏳ |
-| Export COCO segmentation | ⏳ |
-| Save final masks | ⏳ |
+Validate **what is annotatable in NIR**, define **inclusion/exclusion rules**, and freeze the **structural taxonomy** before scaling.
+
+### Scope
+
+* Pilot size: **10–30 images**
+* Dataset: CASIA-Iris-Interval (NIR)
+* Tooling: CVAT (+ SAM assistive only)
+* Output: **canonical annotation archive**
+* **NOT a training dataset**
+
+---
+
+### Annotation Definition & Rules
+
+| Task                                                                               | Status |
+| ---------------------------------------------------------------------------------- | ------ |
+| Define structural labels (pupil, iris, collarette, scurf rim, contraction furrows) | ✔      |
+| Define inclusion criteria per label                                                | ✔      |
+| Define explicit exclusion rules (radial fibers, crypt texture, artifacts)          | ✔      |
+| Document conditional labels (collarette / scurf rim / furrows)                     | ✔      |
+| Freeze annotation granularity & polygon style                                      | ✔      |
+
+---
+
+### Pilot Annotation Execution
+
+| Task                                                       | Status |
+| ---------------------------------------------------------- | ------ |
+| Select visually diverse pilot images                       | ✔      |
+| Create CVAT project & label schema                         | ✔      |
+| Generate SAM proposals (assistive only, never auto-accept) | ⏳     |
+| Manual polygon annotation in CVAT                          | ✔      |
+| Annotate pupil & iris boundary                             | ✔      |
+| Annotate collarette (only when clearly visible)            | ✔      |
+| Annotate contraction furrows (major, circumferential only) | ✔      |
+| Annotate scurf rim (only when separable from sclera)       | ✔      |
+| Skip ambiguous structures                                  | ✔      |
+
+---
+
+### Quality Assurance (Pilot)
+
+| Task                                       | Status |
+| ------------------------------------------ | ------ |
+| Self-QA pass (frame-by-frame review)       | ✔      |
+| Check label consistency across images      | ✔      |
+| Verify no hallucinated structures          | ✔      |
+| Confirm conditional omission is consistent | ✔      |
+| Log ambiguity & edge cases                 | ✔      |
+
+---
+
+### Export & Archival
+
+| Task                                          | Status |
+| --------------------------------------------- | ------ |
+| Export annotations in **CVAT for images 1.1** | ✔      |
+| Preserve polygon geometry (no rasterization)  | ✔      |
+| Archive pilot annotations                     | ✔      |
+| Freeze ANNOTATION_SPEC.md                     | ✔      |
+| Write PILOT_NOTES.md                          | ✔      |
+
+---
 
 **Restrictions**
-- No model training  
+
+* ❌ No dataset-wide annotation
+* ❌ No COCO / YOLO / nnU-Net export
+* ❌ No model training
+* ❌ No label changes after lock
 
 ---
 
-## v0.5 — Segmentation Model Training (nnU-Net)
+## v0.5 — Dataset-Scale Segmentation Annotation (PRODUCTION)
 
-| Task | Status |
-|------|--------|
-| Convert dataset to nnU-Net format | ⏳ |
-| Verify preprocessing | ⏳ |
-| Train nnU-Net model | ⏳ |
-| Validate Dice / IoU metrics | ⏳ |
-| Save checkpoints & configs | ⏳ |
+### Purpose
+
+Create a **research-grade segmentation dataset** using the **frozen v0.4 protocol**.
 
 ---
 
-## v0.6 — Micro-feature Annotation (YOLO)
+### Dataset Scope
 
-| Task | Status |
-|------|--------|
-| Define lacuna / crypt taxonomy | ⏳ |
-| Annotate micro-features | ⏳ |
-| Export YOLO labels | ⏳ |
-| QA pass | ⏳ |
-
----
-
-## v0.7 — Detection Model Training
-
-| Task | Status |
-|------|--------|
-| Train YOLOv8 / YOLOv10 | ⏳ |
-| Evaluate AP / PR curves | ⏳ |
-| Error analysis | ⏳ |
-| Relabel if needed | ⏳ |
-| Save final weights | ⏳ |
+| Task                                                | Status |
+| --------------------------------------------------- | ------ |
+| Select target dataset size (100–300 images minimum) | ⏳      |
+| Ensure subject-disjoint splits (reuse v0.3)         | ⏳      |
+| Balance for occlusion / illumination / eye side     | ⏳      |
+| Lock image list for annotation                      | ⏳      |
 
 ---
 
-## v0.8 — Sector Mapping Engine
+### Annotation Execution
 
-| Task | Status |
-|------|--------|
-| Iris center extraction | ⏳ |
-| Polar transformation | ⏳ |
-| Sector definition (12 / 24) | ⏳ |
-| Map detections to sectors | ⏳ |
-
----
-
-## v0.9 — Rule-Based Interpretation
-
-| Task | Status |
-|------|--------|
-| Define structural rules | ⏳ |
-| Implement rule engine | ⏳ |
-| Generate textual summaries | ⏳ |
-| Validate consistency | ⏳ |
+| Task                                         | Status |
+| -------------------------------------------- | ------ |
+| Reuse v0.4 label schema (no changes allowed) | ⏳      |
+| Annotate pupil & iris boundary               | ⏳      |
+| Annotate collarette conditionally            | ⏳      |
+| Annotate scurf rim conditionally             | ⏳      |
+| Annotate contraction furrows conservatively  | ⏳      |
+| Enforce exclusion rules strictly             | ⏳      |
 
 ---
 
-## v0.10 — VLM Interpretation (Explanation Only)
+### Quality Assurance (Production)
 
-| Task | Status |
-|------|--------|
-| Select VLM | ⏳ |
-| Define prompt templates | ⏳ |
-| Generate natural-language explanations | ⏳ |
-| Merge with rule-based output | ⏳ |
+| Task                             | Status |
+| -------------------------------- | ------ |
+| Periodic QA sampling (10–20%)    | ⏳      |
+| Drift detection vs v0.4 pilot    | ⏳      |
+| Remove over-annotated structures | ⏳      |
+| Final dataset consistency check  | ⏳      |
+
+---
+
+### Export
+
+| Task                          | Status |
+| ----------------------------- | ------ |
+| Export canonical CVAT archive | ⏳      |
+| Freeze annotation dataset     | ⏳      |
+| Convert to COCO segmentation  | ⏳      |
+| Convert to nnU-Net format     | ⏳      |
 
 **Restrictions**
-- No decision-making  
-- No diagnostic claims  
+
+* ❌ No interpretation
+* ❌ No taxonomy claims
+
+---
+
+## v0.6 — Segmentation Model Training (nnU-Net)
+
+### Purpose
+
+Test whether **machine learning can learn the defined iris structures**.
+
+---
+
+| Task                                      | Status |
+| ----------------------------------------- | ------ |
+| Generate segmentation masks from polygons | ⏳      |
+| Validate mask alignment & class channels  | ⏳      |
+| Prepare nnU-Net dataset structure         | ⏳      |
+| Train baseline nnU-Net model              | ⏳      |
+| Evaluate Dice / IoU (internal only)       | ⏳      |
+| Perform visual sanity checks              | ⏳      |
+| Analyze failure cases                     | ⏳      |
+
+---
+
+## v0.7 — Micro-feature Annotation (YOLO)
+
+### Purpose
+
+Annotate **secondary iris structures** within **segmented iris regions**.
+
+---
+
+| Task                                              | Status |
+| ------------------------------------------------- | ------ |
+| Define lacuna / crypt taxonomy (NIR-visible only) | ⏳      |
+| Restrict annotation to iris mask                  | ⏳      |
+| Annotate medium–large micro-features              | ⏳      |
+| Export YOLO labels                                | ⏳      |
+| QA pass                                           | ⏳      |
+
+---
+
+## v0.8 — Detection Model Training
+
+| Task                    | Status |
+| ----------------------- | ------ |
+| Train YOLOv8 / YOLOv10  | ⏳      |
+| Evaluate AP / PR curves | ⏳      |
+| Error analysis          | ⏳      |
+| Relabel if required     | ⏳      |
+| Save final weights      | ⏳      |
+
+---
+
+## v0.9 — Sector Mapping Engine
+
+| Task                                      | Status |
+| ----------------------------------------- | ------ |
+| Iris center extraction                    | ⏳      |
+| Polar transformation                      | ⏳      |
+| Define clock-sector schema (12 / 24)      | ⏳      |
+| Map segmentations & detections to sectors | ⏳      |
+
+---
+
+## v0.10 — Rule-Based & VLM Interpretation (Explanation Only)
+
+| Task                                   | Status |
+| -------------------------------------- | ------ |
+| Define structural interpretation rules | ⏳      |
+| Implement rule engine                  | ⏳      |
+| Generate textual summaries             | ⏳      |
+| Add VLM explanation layer              | ⏳      |
+
+**Restrictions**
+
+* ❌ No diagnostic claims
+* ❌ No decision-making
 
 ---
 
 ## v1.0 — Alpha Release (Complete Pipeline)
 
-| Task | Status |
-|------|--------|
-| End-to-end pipeline runner | ⏳ |
-| Visual overlays | ⏳ |
-| JSON & PDF reports | ⏳ |
-| Reproducibility validation | ⏳ |
-| Final documentation | ⏳ |
+| Task                       | Status |
+| -------------------------- | ------ |
+| End-to-end pipeline runner | ⏳      |
+| Visual overlays            | ⏳      |
+| JSON & PDF reports         | ⏳      |
+| Reproducibility validation | ⏳      |
+| Final documentation        | ⏳      |
 
 ---
 
-## Governing Rule
+## Governing Rule (FINAL)
 
-> If a step which injects **human knowledge**, it will occur **after v0.3**.  
-> If a step which injects **machine learning**, it will occur **after annotation**.
+> Any step injecting **human knowledge** occurs only during annotation phases (v0.4–v0.5).
+> Any step injecting **machine learning** occurs only after annotation datasets are frozen.
 
-This protocol is followed methodological validity, reproducibility, and research integrity.
-
----
-
-# 🔮 **v2.0 — RGB Expansion (TBA)**  
-Requires color-visible datasets.
-
-### Planned Features:
-- Pigment color analysis  
-- Iris color typing  
-- Toxicity rings  
-- Psora/Toxemia pigments  
-- Acute–Chronic color stages  
-- Emotional/color rings  
+This ensures **methodological validity, reproducibility, and scientific integrity**.
 
 ---
 
+## 🔮 v2.0 — RGB Expansion (TBA)
+
+Requires **color-visible iris datasets**.
+
+### Planned Features
+
+* Pigment color analysis
+* Iris color typing
+* Toxicity & stress rings
+* Chromatic staging
+* Emotional/color structures
+
+---
 # ⚠️ Current Limitations
 
-- NIR images = **no color information**  
-- NIR model will **NOT generalize to RGB**  
-- Fine micro-features may be too small in NIR  
-- No medical diagnosis intended  
-- CASIA dataset cannot be redistributed  
+* NIR images contain **no color information**
+* NIR-trained models do **not generalize to RGB**
+* Fine micro-features may be ambiguous in NIR
+* No medical diagnosis intended
+* CASIA datasets cannot be redistributed
 
 ---
 
 # 📜 Citation
+
 “Portions of the research in this work use the CASIA-IrisV4 dataset collected by the Chinese Academy of Sciences’ Institute of Automation.”
 
 ---
 
 # 🤝 Contributing
-- PRs welcome  
-- Use feature branches  
-- Follow formatting (black, ruff)  
-- Add tests for new code  
 
----
-
-# 🛡 License
-MIT License.
+* PRs welcome
+* Use feature branches
+* Follow formatting (black, ruff)
+* Add tests for new code
 
 ---
 

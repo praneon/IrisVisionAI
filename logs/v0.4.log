@@ -1,0 +1,56 @@
+```markdown
+# v0.4 — Annotation Phase Logs
+
+This document defines the **logging structure and required log entries**
+for **v0.4: Structural Segmentation Annotation**.
+
+All logs in this phase are **human-written**, observational, and immutable
+once v0.4 is locked.
+
+---
+
+## Log Files Required (v0.4)
+
+All files live under:
+
+```
+
+data/annotations/v0.4_pilot/
+
+````
+
+### 1. `PILOT_NOTES.md`
+**Purpose:**  
+Capture high-level notes during pilot annotation.
+
+**What goes here:**
+- Overall impressions
+- Fatigue notes
+- Class-wise difficulty
+- Tool friction (CVAT issues, UI problems)
+
+**Template:**
+
+```markdown
+# v0.4 Pilot Notes
+
+## Annotator
+- Name:
+- Date range:
+
+## General Observations
+- 
+
+## Difficult Structures
+- collarette:
+- scurf_rim:
+- contraction_furrows:
+
+## Tooling Notes
+- CVAT performance:
+- Polygon editing issues:
+
+## Fatigue / Bias Notes
+-
+````
+

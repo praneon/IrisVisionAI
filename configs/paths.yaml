@@ -1,16 +1,53 @@
-# IrisVisionAI – Global Path Contracts (v0.2)
+# IrisVisionAI — Global Path Contracts
+# Version: v0.4 (LOCKED)
+# Purpose: Single source of truth for all filesystem dependencies
+
+# -------------------------------------------------------------------
+# PRIVATE RESEARCH INFRASTRUCTURE (NOT PART OF GIT)
+# -------------------------------------------------------------------
+
+infra:
+  root: /home/praneon/data/workspace/infra
 
 datasets:
-  casia_interval_root: /data/workspace/infra/datasets/casia/casia_interval
+  casia_interval:
+    root: ${infra.root}/image_splits/casia_interval
+    images:
+      pilot: ${datasets.casia_interval.root}/pilot
+      train: ${datasets.casia_interval.root}/train
+      val:   ${datasets.casia_interval.root}/val
+      test:  ${datasets.casia_interval.root}/test
+
+# -------------------------------------------------------------------
+# FRAMEWORK RUNTIMES (PRIVATE, NOT VERSIONED)
+# -------------------------------------------------------------------
 
 nnunet:
-  raw: /data/workspace/infra/frameworks/nnunet/raw
-  preprocessed: /data/workspace/infra/frameworks/nnunet/preprocessed
-  results: /data/workspace/infra/frameworks/nnunet/results
+  root: ${infra.root}/frameworks/nnunet
+  raw: ${nnunet.root}/raw
+  preprocessed: ${nnunet.root}/preprocessed
+  results: ${nnunet.root}/results
+
+# -------------------------------------------------------------------
+# PROJECT REPOSITORY (VERSIONED, PUBLIC)
+# -------------------------------------------------------------------
 
 project:
-  repo_root: /data/workspace/projects/IrisVisionAI
-  working_data: /data/workspace/projects/IrisVisionAI/data/working  # v0.3+
-  annotations: /data/workspace/projects/IrisVisionAI/data/annotations
-  outputs: /data/workspace/projects/IrisVisionAI/outputs
+  repo_root: /home/praneon/data/workspace/projects/IrisVisionAI
+
+  annotations:
+    root: ${project.repo_root}/data/annotations
+
+  metadata:
+    root: ${project.repo_root}/data/metadata
+    csv: ${project.metadata.root}/metadata.csv
+
+  splits:
+    root: ${project.repo_root}/data/splits
+
+  working:
+    root: ${project.repo_root}/data/working  # temporary artifacts only
+
+  outputs:
+    root: ${project.repo_root}/outputs
 
