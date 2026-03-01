@@ -1,7 +1,7 @@
 # SECURITY POLICY
 
 ## 1. Supported Versions
-IrisVisionAI is under active research development.  
+IrisAtlasAI is under active research development.  
 Security updates or patches are provided **as needed**, not on a fixed release cycle.
 
 | Version | Status |
@@ -122,4 +122,4 @@ may result in:
 
 ---
 
-Thank you for helping keep **IrisVisionAI** safe, ethical, and research-focused.
+Thank you for helping keep **IrisAtlasAI** safe, ethical, and research-focused.

@@ -1,111 +1,54 @@
-# Evaluation Metrics & Protocol
+# Evaluation Protocol
 
-This document defines the evaluation methodology used across the
-segmentation, detection, mapping, and interpretation stages of IrisVisionAI.
+This project evaluates segmentation, detection, and rule/mapping layers with transparent reporting.
+The goal is to understand model behavior, not chase a single headline metric.
 
-The emphasis is on **transparent reporting**, **failure visibility**, and
-**research-grade validation**, not leaderboard optimization.
+## 1. Segmentation
 
----
+Report at least:
+- Dice per class
+- IoU per class and mean IoU
+- precision/recall trends where useful
 
-## 1. Segmentation Evaluation
+Also keep qualitative overlays for:
+- strong cases
+- weak cases
+- typical cases
 
-Segmentation models are evaluated on **structural accuracy**, both
-quantitatively and qualitatively.
+Each qualitative panel should compare prediction vs reference mask clearly.
 
-### Quantitative Metrics
+## 2. Micro-feature detection
 
-- **Dice Coefficient**  
-  - Computed per class (`pupil`, `iris`, `collarette`, `scurf_rim`, `contraction_furrows`)
-  - Reported as mean ± standard deviation
+Report at least:
+- AP@0.5
+- AP@0.5:0.95
+- class-level precision/recall
+- small-object performance focus (for tiny structures)
 
-- **Intersection over Union (IoU)**
-  - Mean IoU across classes
-  - Per-class IoU for error analysis
+Include failure analysis:
+- false positives
+- false negatives
+- class confusion patterns
 
-- **Pixel-wise Precision & Recall**
-  - Useful for detecting over-segmentation vs under-segmentation
-  - Reported per class
+## 3. Sector mapping and interpretation layers
 
-### Qualitative Evaluation
+These are not pure ML prediction tasks, so evaluate them differently.
 
-- Save **visual grids** showing:
-  - Best-performing samples
-  - Worst-performing samples
-  - Typical (median) cases
-- Overlays must include:
-  - Ground truth mask
-  - Predicted mask
-  - Difference visualization
+### Sector mapping
+- deterministic test cases with known sector expectations
+- boundary-condition checks
+- regression tests for coordinate conversion
 
-Visual results are considered mandatory, not optional.
+### Interpretation layer
+- review for structural consistency
+- verify non-diagnostic language policy
+- ensure generated text matches actual structural inputs
 
----
+## 4. Artifact policy
 
-## 2. Detection Evaluation (Micro-features)
+Each evaluation cycle should preserve:
+- metric tables
+- representative visual outputs
+- notes on known failure modes
 
-Detection models (YOLO-based) are evaluated with standard object detection
-metrics, with special attention to small structures.
-
-### Quantitative Metrics
-
-- **AP@0.5**
-- **AP@0.5:0.95**
-- **AP_small**
-  - Critical for small lacunae, crypts, and fine structural features
-- **Precision and Recall**
-  - Reported per class
-- **Confusion Matrix**
-  - Used to analyze systematic misclassification between feature types
-
-### Error Analysis
-
-- False positives vs false negatives analyzed separately
-- Class imbalance effects explicitly discussed
-- Representative failure cases visualized
-
----
-
-## 3. Mapping & Interpretation Evaluation
-
-Mapping and interpretation are evaluated differently from ML models, as they
-are partially rule-based.
-
-### Sector Mapping
-
-- **Unit tests** for polar coordinate and sector assignment
-- Synthetic test points with known sector labels
-- Edge-case testing at sector boundaries
-
-### Interpretation Layer
-
-- **Human expert qualitative review**
-  - Focus on structural consistency
-  - No diagnostic or clinical claims evaluated
-
-- Evaluation is descriptive, not statistical
-
----
-
-## 4. Reporting & Artifacts
-
-- All metrics, plots, and qualitative examples are stored under:
-        experiments/metrics/
-- Reports must include:
-- Metric tables
-- Visual examples
-- Notes on known failure modes
-
-No single scalar score is treated as definitive.
-
----
-
-## 5. Evaluation Philosophy
-
-- Prefer **clarity over compression**
-- Always pair metrics with visuals
-- Explicitly document weaknesses
-- Avoid over-interpretation of numerical scores
-
-Evaluation exists to **understand model behavior**, not to claim optimality.
-
+Avoid reporting a single score without context.

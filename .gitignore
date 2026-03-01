@@ -1,23 +1,37 @@
-# Python
+# Python/cache
 __pycache__/
+**/__pycache__/
 *.pyc
 *.pyo
+.pytest_cache/
+**/.pytest_cache/
 
 # Environments
 envs/
 .conda/
 .venv/
+venv/
 
 # Data (never commit real datasets)
-data/raw/*
-data/working/*
-!data/raw/.gitkeep
-!data/working/.gitkeep
+data/raw/**
+data/working/**
 
-# Models & outputs
-models/*
-outputs/*
+# Runtime outputs/logs
+outputs/**
+logs/**
+
+# Models
+models/
+
+# Build/distribution artifacts
+build/
+dist/
 runs/
+*.deb
+*.msi
+*.exe
+*.zip
+*.tar.gz
 
 # Jupyter
 .ipynb_checkpoints/
