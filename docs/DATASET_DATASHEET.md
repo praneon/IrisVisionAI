@@ -1,113 +1,67 @@
-# DATASET DATASHEET — IrisVisionAI (v0.2)
+# Dataset Datasheet (v0.2 Freeze)
 
-## 1. Dataset Identity
-- **Dataset Name:** CASIA-Iris-Interval  
-- **Source:** CASIA Iris Image Database (Chinese Academy of Sciences)  
-- **Modality:** Near-Infrared (NIR), grayscale  
-- **Image Type:** Structural iris images  
-- **Usage in Project:** Research-only, non-diagnostic structural iris analysis  
+## Identity
 
----
+- Dataset: CASIA-Iris-Interval
+- Modality: NIR grayscale iris images
+- Source: CASIA Iris Database
+- Use in this project: research-only structural analysis (non-diagnostic)
 
-## 2. Dataset Scope (v0.2 Lock)
-- **Primary Dataset:** CASIA-Iris-Interval  
-- **Other CASIA Subsets:**  
-  - CASIA-Iris-Lamp — Not used  
-  - CASIA-Iris-Distance — Not used  
-  - CASIA-Iris-Thousand — Not used  
-  - CASIA-Iris-Syn — Not used  
-- **External Datasets (PolyU, IITD, ND-GFI):** Archived, not used  
-- **Dataset Status:** Frozen for v0.2  
+## Scope decision in v0.2
 
----
+- Primary dataset: CASIA-Iris-Interval
+- Other CASIA subsets: excluded for this phase
+- External datasets (PolyU, IITD, ND-GFI): not active in v0.2
+- v0.2 status: frozen
 
-## 3. Subjects
-- **Total Subjects:** 249  
-- **Subject Identifiers:** 001 – 249  
-- **Eye Availability:**  
-  - Some subjects contain both left and right eye images  
-  - Some subjects contain only one eye  
-- **Subject Independence:** Subjects are treated as independent units  
+## Subject and image summary
 
----
+- Subjects: 249
+- Images: 2639
+- Format: JPG
+- Resolution: 320x280
+- Eye side: left and right, depending on subject availability
 
-## 4. Images
-- **Total Images:** 2639  
-- **Image Format:** JPG  
-- **Image Resolution:** 320 × 280 pixels  
-- **Eye Types:**  
-  - Left eye (L)  
-  - Right eye (R)  
-- **Images per Subject:** Variable  
+## Organization
 
----
+Data follows subject and eye hierarchy with original naming retained.
+No raw image renaming or modification is applied in-place.
 
-## 5. Data Organization
-- **Directory Structure:**
-subject_id/
+## Quality control in v0.2
 
-```bash
-   ├──L/
-   │  └── S1YYY L NN.jpg
-   └──R/
-      └── S1YYY R NN.jpg
-```
+- Corruption checks: completed
+- Corrupt files found: none in v0.2 audit
+- Blur/occlusion flags: captured in metadata where applicable
+- Hard exclusion: not applied at this phase
 
-- **File Naming Convention:**  
-- `YYY` → Subject ID  
-- `L / R` → Eye side  
-- `NN` → Image index within subject-eye  
-- **Raw Data Policy:**  
-- No renaming performed  
-- No image modification performed  
+## Metadata
 
----
+Primary file:
+- `data/metadata/metadata.csv`
 
-## 6. Quality Control (v0.2)
-- **Corruption Check:** Performed programmatically  
-- **Corrupt Images:** 0  
-- **Blur & Occlusion Flags:**  
-- Present in metadata  
-- Conservatively applied  
-- **Image Exclusion:** None at this stage  
+Expected record granularity:
+- one row per image
 
----
+Typical fields:
+- subject id
+- eye side
+- image index
+- resolution and quality flags
+- split assignment (initially unset during v0.2)
 
-## 7. Metadata
-- **Metadata File:** `data/metadata/metadata.csv`  
-- **Granularity:** One row per image  
-- **Key Fields:**  
-- Subject ID  
-- Eye (L/R)  
-- Image index  
-- Resolution  
-- Quality control flags  
-- **Split Column:**  
-- All values set to `unset`  
-- Dataset not yet split  
+## Leakage policy
 
----
+- Split unit is subject, not image.
+- A subject may appear in only one split.
+- Left/right images of same subject are treated as linked for split purposes.
 
-## 8. Data Leakage Prevention
-- **Split Strategy:** Subject-level (not image-level)  
-- **Leakage Policy:**  
-- A subject may appear in only one split  
-- Left and right eyes of the same subject are treated as dependent  
-- **Current Status:** No train/validation/test split applied  
+## Known limitations
 
----
+- No demographic attributes bundled in source dataset metadata
+- Uneven per-subject sample counts
+- Dataset is not a clinical ground truth source
 
-## 9. Limitations
-- No demographic metadata available  
-- No acquisition timestamps available  
-- Uneven distribution of images per subject  
-- Dataset is not intended for medical diagnosis  
+## Version note
 
----
-
-## 10. Version Status
-- **v0.1:** Infrastructure & project setup — COMPLETE  
-- **v0.2:** Dataset preparation & documentation — COMPLETE  
-- **v0.3+:** Annotation, modeling, and interpretation — NOT STARTED  
-
----
+This datasheet documents the v0.2 data decision state.
+Later pipeline phases can consume the dataset but should not silently alter this baseline.

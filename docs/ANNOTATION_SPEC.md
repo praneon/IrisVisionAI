@@ -1,179 +1,95 @@
-# 🧾 `ANNOTATION_SPEC.md` — *IrisVisionAI v0.4*
+# Annotation Specification 
 
-**Version:** v0.4 (FROZEN)  
-**Scope:** Near-Infrared (NIR) iris images — CASIA-Iris-Interval  
-**Purpose:** Pilot validation of structural annotation protocol  
-**Annotation Type:** Polygon-based segmentation  
-**Tooling:** CVAT  
-**Reference:** `AMBIGUITY_REGISTRY.md (v0.4)`
+Scope:
+- Dataset: CASIA-Iris-Interval
+- Modality: NIR grayscale
+- Tool: CVAT polygon annotation
+- Phase: v0.4 pilot protocol validation
 
----
+Reference:
+- `AMBIGUITY_REGISTRY.md`
 
-## Purpose of This Document
+## Goal
 
-This document defines **how structural iris features are annotated** during the **v0.4 pilot phase**.
+Define how we annotate visible iris structures consistently.
+The priority is consistency and restraint, not maximum label density.
 
-It exists to:
-- ensure consistent human decisions,
-- prevent over-annotation,
-- and make ambiguity handling explicit.
+## In-scope labels
 
-This document:
-- **does define rules**
-- **does not define thresholds for models**
-- **does not claim anatomical certainty beyond visible structure**
+- `pupil`: visible pupil boundary
+- `iris`: visible iris tissue between pupil and limbus
+- `collarette`: inner structural ring when clearly visible
+- `scurf_rim`: darker peripheral band near limbus when clearly visible
+- `contraction_furrows`: broad arc-like furrows when clearly visible
 
----
+## Core principles
 
-## Structures in Scope
+- Annotate only what is structurally visible.
+- Do not guess behind occlusion.
+- Do not annotate texture unless clear structural boundaries exist.
+- Conservative omission is preferred over speculative labeling.
 
-| Label Name | Description | Annotation Type |
-|-----------|-------------|-----------------|
-| `pupil` | Visible pupil boundary, regardless of shape | polygon |
-| `iris` | Visible iris region between pupil and limbus, excluding occlusions | polygon |
-| `collarette` | Inner structural boundary separating pupillary and ciliary zones (if visible) | polygon |
-| `scurf_rim` | Thin, darker peripheral iris band near the limbus (if visible) | polygon |
-| `contraction_furrows` | Broad, concentric arc-like furrows in the mid-periphery (if visible) | polygon |
+## Ambiguity handling rules
 
----
+### A01 Partial eyelash occlusion
+- Do not annotate eyelashes/eyelids.
+- Stop iris boundary at last visible region.
+- No interpolation through occlusion.
 
-## General Annotation Principles
+### A02 Reflection crossing pupil edge
+- Ignore reflection pixels as structures.
+- Trace the best estimate of true pupil boundary.
 
-- Annotate **only what is structurally visible**.
-- When in doubt, **do not annotate**.
-- Texture alone is **not** sufficient justification.
-- Polygons should follow **anatomical edges**, not visual noise.
-- No structure is required to appear in every image.
+### A03 Weak iris–sclera contrast
+- Follow consistent visible limbus transition.
+- Do not push mask into sclera.
+- If uncertain, annotate conservatively.
 
----
+### A04 Faint/discontinuous collarette
+- Annotate collarette only where boundary is clearly visible.
+- Partial collarette annotation is valid.
+- Skip if it blends into texture.
 
-## Annotation Rules by Ambiguity Class
+### A05 Texture vs structure confusion
+- Fine grain/radial texture is not a structural label.
+- Require clear edge continuity for structural labels.
 
-### A01 — Partial Eyelash Occlusion
+### A06 Shadow-induced false boundary
+- Ignore boundaries that track illumination/shadow artifacts.
 
-- Do **not** annotate eyelashes or eyelids.
-- Stop the `iris` polygon at the last visible boundary.
-- Do **not** interpolate or guess behind occlusion.
+### A07 Soft pupil edge
+- Trace visible contour without geometric regularization.
+- Do not fit idealized ellipse shapes.
 
----
+### A08 Peripheral texture fade
+- Fading texture alone does not imply scurf rim.
+- Require a separable dark peripheral band for `scurf_rim`.
 
-### A02 — Reflection Overlapping Pupil Boundary
+## Structure-specific notes
 
-- Ignore specular reflections.
-- Annotate the **true pupil boundary** as if the reflection were absent.
-- Reflections are **not** annotated as structures.
+- Pupil: annotate whenever visible.
+- Iris: annotate visible tissue only; exclude occluded segments.
+- Collarette: optional/conditional.
+- Furrows: only major arc-like furrows, not fine lines.
+- Scurf rim: only when distinct from limbus/sclera transition.
 
----
+## Tooling constraints
 
-### A03 — Low-Contrast Iris–Sclera Boundary
+- Polygon tool only
+- No brush masks, no bbox-only labels
+- Closed polygons only
+- Minimum three vertices per polygon
+- Manual vertex correction required
 
-- Follow the most consistent visible limbal transition.
-- Do not extend the iris polygon into sclera.
-- If the boundary fades gradually, annotate conservatively.
+## QA checklist
 
----
+- Polygons follow visible anatomy
+- Occluded regions are not hallucinated
+- Texture-only structures are excluded
+- Similar cases get similar decisions
+- Export format is valid CVAT polygon output
 
-### A04 — Discontinuous or Faint Collarette
+## Version lock
 
-- Annotate `collarette` **only if a structural boundary is clearly visible**.
-- Partial or quadrant-limited visibility is acceptable.
-- Skip annotation if the boundary blends into general iris texture.
-
----
-
-### A05 — Texture vs Structural Feature Ambiguity
-
-- Fine radial lines, grain, or mottling are **not** structures.
-- Do not infer furrows or collarette from texture patterns alone.
-- Structural annotation requires **clear edge continuity**.
-
----
-
-### A06 — Shadow-Induced False Boundary
-
-- Ignore shadow edges that mimic structural rings.
-- Annotate only boundaries that persist independent of illumination gradients.
-
----
-
-### A07 — Softened Pupil Edge Due to Illumination
-
-- Annotate the pupil based on best visible estimate.
-- Do not simplify or regularize the shape.
-- Ellipse fitting is **not allowed**.
-
----
-
-### A08 — Peripheral Iris Texture Fade
-
-- Gradual texture loss toward the limbus does not imply a scurf rim.
-- Annotate `scurf_rim` only if a **distinct, darker band** is visible.
-
----
-
-## Structure-Specific Rules
-
-### Pupil
-- Always annotate if visible.
-- Shape may be irregular.
-- Ignore reflections and glare.
-
-### Iris
-- Annotate only visible iris tissue.
-- Exclude occluded regions.
-- Do not guess beyond eyelids or lashes.
-
-### Collarette
-- Conditional structure.
-- Annotate only when a genuine structural boundary is apparent.
-- Absence is a valid outcome.
-
-### Contraction Furrows
-- Annotate **only major, arc-shaped furrows**.
-- Fine radial striations are excluded.
-- Full circular rings are not expected.
-
-### Scurf Rim
-- Annotate only when separable from sclera.
-- Thin, continuous darkening near the limbus.
-- Skip if contrast is insufficient.
-
----
-
-## Annotation Tooling Standards
-
-- Use **polygon tool only**
-- No brush, no bounding boxes
-- Minimum **3 vertices per polygon**
-- Polygons must be closed
-- Adjust vertices manually; no auto-accept
-
----
-
-## Quality Assurance Checklist (v0.4)
-
-| Check | Requirement |
-|-----|-------------|
-| Boundary accuracy | Polygons follow visible anatomical edges |
-| Occlusion handling | Iris excludes occluded regions |
-| Structural restraint | No texture-only annotations |
-| Consistency | Similar visibility → similar decisions |
-| Format | CVAT polygon annotations only |
-
----
-
-## v0.4 Scope Constraints
-
-- Only pilot images are annotated in this version.
-- Annotation rules are **frozen after pilot completion**.
-- No new ambiguity classes may be added in v0.4.
-- Observations for future refinement must go to `OBSERVATION_LOG.md`.
-
----
-
-## Version Status
-
-**v0.4 — LOCKED**  
-Annotation protocol validated through pilot study.  
-All future annotation must follow this specification exactly.
-
+v0.4 annotation protocol is frozen.
+Changes require a new versioned spec update.

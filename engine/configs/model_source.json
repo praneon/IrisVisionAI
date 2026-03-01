@@ -1,0 +1,5 @@
+{
+  "url": "",
+  "sha256": "",
+  "notes": "Set url to a hosted ZIP containing nnU-Net model files (dataset.json, plans.json, fold_*/checkpoint_final.pth)."
+}

@@ -1,104 +1,75 @@
-# AMBIGUITY REGISTRY — v0.4 (FROZEN)
+# Ambiguity Registry (v0.4, Frozen)
 
-Purpose:
-To enumerate recurring, observer-independent ambiguity patterns identified
-during pilot observation of NIR iris images.
+This registry lists recurring ambiguity patterns seen during pilot review.
+It is a reference index, not a rulebook.
 
-This document:
-- Contains no rules
-- Contains no thresholds
-- Contains no annotation instructions
-
----
+This file intentionally does not define:
+- annotation instructions
+- model thresholds
+- clinical interpretation
 
 ## A01 — Partial Eyelash Occlusion
-Description:
-Eyelashes partially obscure the superior iris region without full occlusion.
+Eyelashes cover part of the upper iris without fully hiding it.
 
-Observed in:
+Seen in:
 - S1001L01.jpg
 - S1003R01.jpg
 - S1011L01.jpg
 
----
+## A02 — Reflection Crossing the Pupil Boundary
+Specular reflection overlaps the pupil edge and reduces boundary clarity.
 
-## A02 — Reflection Overlapping Pupil Boundary
-Description:
-Specular reflections intersect or touch the pupil boundary, obscuring edge clarity.
-
-Observed in:
+Seen in:
 - S1001L01.jpg
 - S1012R01.jpg
 - S1018R01.jpg
 
----
+## A03 — Weak Iris–Sclera Boundary
+Limbus contrast is low due to lighting gradient or texture fade.
 
-## A03 — Low-Contrast Iris–Sclera Boundary
-Description:
-Limbus appears weak due to illumination gradients or peripheral texture fade.
-
-Observed in:
+Seen in:
 - S1005L01.jpg
 - S1008L01.jpg
 - S1014L01.jpg
 
----
+## A04 — Faint or Broken Collarette
+Collarette appears only in parts of the iris and lacks continuity.
 
-## A04 — Discontinuous or Faint Collarette
-Description:
-Collarette visibility varies by quadrant and lacks continuous definition.
-
-Observed in:
+Seen in:
 - S1001L01.jpg
 - S1007L01.jpg
 - S1016L01.jpg
 
----
+## A05 — Texture vs Structure Confusion
+Texture can look like crypts/furrows without reliable structural edges.
 
-## A05 — Texture vs Structural Feature Ambiguity
-Description:
-Texture patterns resemble crypts or furrows without clear structural boundaries.
-
-Observed in:
+Seen in:
 - S1013L01.jpg
 - S1017R01.jpg
 
----
-
 ## A06 — Shadow-Induced False Boundary
-Description:
-Shadows mimic structural boundaries near iris periphery.
+Shadows create ring-like edges that can be mistaken for anatomy.
 
-Observed in:
+Seen in:
 - S1005L01.jpg
 - S1014L01.jpg
 
----
+## A07 — Soft Pupil Edge from Illumination
+Pupil boundary appears blurred by lighting falloff.
 
-## A07 — Softened Pupil Edge Due to Illumination
-Description:
-Pupil edge appears blurred due to illumination gradients.
-
-Observed in:
+Seen in:
 - S1010R01.jpg
 - S1018R01.jpg
 
----
+## A08 — Peripheral Texture Fade
+Outer iris texture fades gradually near limbus.
 
-## A08 — Peripheral Iris Texture Fade
-Description:
-Outer iris texture fades gradually toward the limbus.
-
-Observed in:
+Seen in:
 - S1020L01.jpg
 - S1016L01.jpg
 
----
+## Status
 
-Registry Status:
-- Ambiguity space saturated
-- No new recurring types observed
-- Registry frozen for v0.4
-
----
-
+- Ambiguity space considered saturated for v0.4 pilot
+- No new recurring class added after freeze
+- Registry remains locked for v0.4

@@ -1,0 +1,28 @@
+{
+  "rules": [
+    {
+      "metric": "pupil_to_iris",
+      "operator": ">",
+      "threshold": 0.3,
+      "label": "high_pupil_ratio"
+    },
+    {
+      "metric": "furrow_to_iris",
+      "operator": ">",
+      "threshold": 0.05,
+      "label": "high_furrow_density"
+    },
+    {
+      "metric": "collarette_to_iris",
+      "operator": ">",
+      "threshold": 0.1,
+      "label": "prominent_collarette"
+    },
+    {
+      "metric": "scurf_to_iris",
+      "operator": ">",
+      "threshold": 0.02,
+      "label": "peripheral_rim_structure"
+    }
+  ]
+}

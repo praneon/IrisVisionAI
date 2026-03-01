@@ -1,201 +1,95 @@
-# IrisVisionAI — Project Roadmap
-
-This roadmap defines the **ordered, versioned progression** of the IrisVisionAI
-research pipeline. Each version introduces a **single class of irreversible work**
-and is locked once completed.
-
-The roadmap is designed to preserve:
-- methodological clarity,
-- reproducibility,
-- and long-term extensibility.
-
----
-
-## v0.1 — Infrastructure & Project Setup ✅
-
-**Purpose:** Establish a stable research workspace.
-
-Key outcomes:
-- Repository structure finalized
-- Separation of `infra/` (private) and `projects/` (public) enforced
-- Environment setup documented
-- Licensing, security, and disclaimers added
-
-**Status:** Complete and locked.
-
----
-
-## v0.2 — Dataset Preparation & Documentation ✅
-
-**Purpose:** Select, audit, and document the dataset without modifying it.
-
-Key outcomes:
-- CASIA-Iris-Interval selected as the sole dataset
-- Other datasets explicitly excluded
-- Dataset audited for corruption and basic quality issues
-- Metadata schema defined
-- `DATASET_DATASHEET.md` written and frozen
-
-**Restrictions:**
-- No dataset splitting
-- No annotation
-- No modeling
-
-**Status:** Complete and locked.
-
----
-
-## v0.3 — Dataset Split & Annotation Readiness ✅
-
-**Purpose:** Prepare the dataset for annotation without injecting labels.
-
-Key outcomes:
-- Subject-disjoint train/val/test split created
-- Split logic documented
-- Metadata updated with split assignments
-- Annotation explicitly deferred
-
-**Restrictions:**
-- No annotation
-- No modeling
-
-**Status:** Complete and locked.
-
----
-
-## v0.4 — Structural Segmentation Annotation (CVAT + SAM) ✅
-
-**Purpose:** Define and validate human annotation protocol.
-
-Key outcomes:
-- Ambiguity space explored and frozen
-- `AMBIGUITY_REGISTRY.md` finalized
-- `ANNOTATION_SPEC.md` written and validated
-- Pilot annotations completed
-- Annotation protocol locked
-
-**Restrictions:**
-- No model training
-- No automatic labeling
-
-**Status:** Complete and locked.
-
----
-
-## v0.5 — Structural Segmentation Model Training (nnU-Net)
-
-**Purpose:** Train a baseline segmentation model on validated annotations.
-
-Planned outcomes:
-- Convert annotations to nnU-Net format
-- Verify preprocessing correctness
-- Train nnU-Net segmentation model
-- Evaluate using Dice, IoU, and visual inspection
-- Save model checkpoints and configs
-
-**Restrictions:**
-- No micro-feature detection
-- No interpretation logic
-
-**Status:** Planned.
-
----
-
-## v0.6 — Micro-feature Annotation (Detection Targets)
-
-**Purpose:** Define and annotate smaller structural features.
-
-Planned outcomes:
-- Define lacunae / crypt taxonomy
-- Annotate micro-features on segmented irises
-- Export detection labels (YOLO format)
-- Perform QA review
-
-**Status:** Planned.
-
----
-
-## v0.7 — Micro-feature Detection Model Training (YOLO)
-
-**Purpose:** Train detection models for micro-structures.
-
-Planned outcomes:
-- Train YOLO-based detector
-- Evaluate AP, precision, recall
-- Analyze small-object performance
-- Save final detection weights
-
-**Status:** Planned.
-
----
-
-## v0.8 — Iris Sector Mapping Engine
-
-**Purpose:** Map structures to anatomical clock sectors.
-
-Planned outcomes:
-- Iris center estimation
-- Polar coordinate transformation
-- Sector definition (12 / 24)
-- Mapping of segmentation and detection outputs
-
-**Status:** Planned.
-
----
-
-## v0.9 — Rule-Based Structural Interpretation
-
-**Purpose:** Produce structured, non-diagnostic interpretations.
-
-Planned outcomes:
-- Define interpretation rules
-- Implement rule engine
-- Generate structured textual summaries
-- Validate logical consistency
-
-**Status:** Planned.
-
----
-
-## v0.10 — Vision-Language Explanation Layer
-
-**Purpose:** Generate human-readable explanations.
-
-Planned outcomes:
-- Select vision-language model
-- Define prompt templates
-- Generate explanatory text from structured outputs
-- Combine with rule-based interpretations
-
-**Restrictions:**
-- No diagnostic claims
-- Explanation only
-
-**Status:** Planned.
-
----
-
-## v1.0 — Alpha Pipeline Release
-
-**Purpose:** Deliver a complete, reproducible research pipeline.
-
-Planned outcomes:
-- End-to-end CLI or runner
-- Visual overlays and reports
-- JSON and PDF outputs
-- Reproducibility validation
-- Final documentation pass
-
-**Status:** Planned.
-
----
-
-## Governing Principle
-
-> Human knowledge enters before machine learning.  
-> Machine learning enters before interpretation.  
-> No version violates this order.
-
-This roadmap is **authoritative**. Deviations require a new version and
-explicit documentation.
-
+# Project Roadmap
+
+This roadmap reflects the execution order used in this project.
+It keeps research flow, code flow, and release flow aligned.
+
+## Current snapshot (March 2026)
+
+- This repository is the research runtime and documentation source of truth.
+- Desktop packaging/UI delivery is maintained in an external app stack path.
+- Annotation pilot protocol is locked; model phases are staged after that lock.
+
+## Completed phases
+
+### v0.1 — Infrastructure foundation
+Delivered:
+- workspace split between private infra and public repo
+- baseline repo structure, policy files, and setup baseline
+
+### v0.2 — Dataset intake and datasheet
+Delivered:
+- CASIA-Iris-Interval selected and locked for active phase
+- dataset audit and metadata baseline
+- data policy boundaries documented
+
+### v0.3 — Subject split freeze
+Delivered:
+- subject-level split manifest
+- split assignments recorded in metadata
+- leakage-prevention policy locked
+
+### v0.4 — Annotation protocol lock
+Delivered:
+- ambiguity registry
+- structural annotation specification
+- pilot annotation baseline exported
+
+## Active phase
+
+### v0.5 — Engine-first architecture hardening
+Status: release-candidate
+
+Completed in this phase:
+- importable `engine.run_analysis(...)` runtime surface
+- extension runtime scaffolding and namespaced outputs
+- single-engine code root (`engine/`) with unified core/config/tests
+- deterministic extension execution order and status locking
+- reproducibility artifacts per run (`results.json`, `manifest.json`, `session_state.json`)
+- manifest hashing and environment/config snapshot capture
+- data consistency gate (`scripts/check_data_consistency.py`)
+
+Remaining to close this phase:
+- final git-tree cleanup/commit hygiene pass before release tag
+- one final release-gate execution on clean working tree
+
+## Next phases
+
+### v0.6 — Segmentation baseline training
+Planned:
+- training dataset conversion/validation
+- baseline segmentation training
+- metric + overlay evaluation package
+
+### v0.7 — Micro-feature detection pipeline
+Planned:
+- micro-feature annotation QA and dataset prep
+- detector training and error analysis
+
+### v0.8 — Sector mapping validation
+Planned:
+- deterministic geometry validation
+- sector-level density outputs and regression checks
+
+### v0.9 — Interpretation layer hardening
+Planned:
+- deterministic summary stability checks
+- language safety constraints for explanatory outputs
+
+### v1.0 — Reproducible alpha release
+Planned:
+- versioned end-to-end pipeline run
+- frozen docs + frozen evaluation artifacts
+- release checklist closure
+
+## Governance rules
+
+- No phase is considered complete without its documentation update.
+- Cross-phase work is allowed only if explicitly tracked in phase notes.
+- Any change to locked phase behavior must be recorded as a new versioned change.
+
+## Release-gate commands
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 pytest -q engine/tests -p no:cacheprovider
+python3 scripts/check_data_consistency.py
+```

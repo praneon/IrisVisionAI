@@ -1,21 +1,57 @@
-MIT License
+IrisAtlasAI Proprietary Research License v1.0
 
-Copyright (c) 2025 Praneon
+Copyright (c) 2026 Praneon. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. Scope
+This software and all related materials in this repository are proprietary.
+All rights are reserved except the limited rights explicitly granted below.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+2. Limited Grant for Non-Commercial Research
+You are granted a limited, non-exclusive, non-transferable, revocable license
+to access and use this software solely for non-commercial research,
+evaluation, and academic study.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+3. Commercial Use Is Prohibited
+Without prior written permission from the copyright owner, you may not:
+- use this software or derivatives for any commercial purpose;
+- sell, sublicense, lease, host, or offer it as a paid or revenue-generating
+  product or service;
+- use it in commercial consulting, product development, deployment, or
+  operations;
+- commercialize research outputs derived from this software.
+
+4. Distribution and Sharing Restrictions
+You may not redistribute this software, modified versions, binaries, model
+artifacts, or derivative works to third parties without prior written
+permission from the copyright owner.
+
+5. Modification Restrictions
+You may modify this software only for internal non-commercial research use.
+Any modified version remains proprietary and subject to this license.
+
+6. Patent Rights
+No patent license is granted, whether express, implied, by estoppel, or
+otherwise. All patent rights are reserved by the copyright owner.
+
+7. Trademark and Branding
+No rights are granted to use the project name, logos, branding, or marks
+except with prior written permission.
+
+8. Compliance and Termination
+Any use outside this license automatically terminates all rights granted under
+this license. Upon termination, you must immediately stop use and destroy all
+copies in your possession or control.
+
+9. No Warranty
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE, NON-INFRINGEMENT, OR FITNESS FOR ANY PARTICULAR USE.
+
+10. Limitation of Liability
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE COPYRIGHT OWNER SHALL NOT BE
+LIABLE FOR ANY CLAIMS, DAMAGES, OR OTHER LIABILITY ARISING FROM OR RELATED TO
+THE SOFTWARE OR THIS LICENSE.
+
+11. Contact for Permissions
+For commercial licensing, redistribution permission, or patent licensing,
+contact the owner through official project channels.

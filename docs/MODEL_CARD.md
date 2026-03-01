@@ -1,23 +1,35 @@
-# Model Card
+# Model Card (Working Draft)
 
-## Model Details
-- Name: IrisVisionAI nnU-Net segmentation
-- Purpose: Structural segmentation of NIR iris images
-- Algorithms: nnU-Net for segmentation; YOLOv8 for detection; SAM for annotation assistance.
+## Model family
 
-## Intended Use
-- Research and educational use in computational iridology and biometric feature extraction.
+- Segmentation: nnU-Net baseline
+- Detection: YOLO baseline for micro-features
+- Annotation assistance: SAM (human-in-the-loop)
 
-## Limitations
-- Trained on NIR data (CASIA). Not suitable for RGB images without retraining/adaptation.
-- Not for clinical or diagnostic use.
+## Intended use
 
-## Training Data
-- CASIA-IrisV4 (NIR), details in DATASET_DATASHEET.md.
+Research use for structural iris analysis on NIR imagery.
+Not a clinical diagnostic system.
 
-## Metrics
-- Report Dice, IoU, AP in experiments/metrics.
+## Out of scope
 
-## Ethical Considerations
-- Respect dataset licensing.
-- No medical claims in outputs.
+- medical diagnosis
+- risk prediction
+- treatment decision support
+
+## Data scope
+
+- Primary source: CASIA-Iris-Interval (NIR)
+- See `DATASET_DATASHEET.md` for dataset constraints and known limitations
+
+## Evaluation expectations
+
+- segmentation: Dice/IoU + visual checks
+- detection: AP and per-class behavior
+- interpretation: consistency and language safety checks
+
+## Safety and ethics notes
+
+- respect dataset licensing
+- avoid diagnostic claims
+- document failure cases and uncertainty explicitly

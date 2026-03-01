@@ -1,10 +1,12 @@
 # Dataset Split Protocol (v0.3)
 
-- Unit of split: Subject (`subject_id`)
-- Split ratios: 70% train / 15% validation / 15% test
-- Random seed: 69
-- Total subjects: 249
-- Leakage prevention: No subject appears in more than one split
+This project uses subject-level splits.
 
-This split is frozen as of IrisVisionAI v0.3.2 and must not be modified.
+- Unit of split: `subject_id`
+- Ratios: 70% train / 15% validation / 15% test
+- Seed: `69`
+- Total subjects: `249`
+- Leakage rule: a subject can appear in only one split
 
+This split definition is frozen for the v0.3 line and should not be changed silently.
+If we ever revise it, the change must be versioned and documented.

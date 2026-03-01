@@ -1,0 +1,32 @@
+{
+  "model_version": "iris_nnunet_v1.0.0",
+  "model_folder": "./models/nnunet_iris",
+  "checkpoint_name": "checkpoint_final.pth",
+  "folds": [0],
+  "device": "cpu",
+  "input_size": [256, 256],
+  "tile_step_size": 0.5,
+  "perform_everything_on_device": false,
+  "class_labels": {
+    "background": 0,
+    "pupil": 1,
+    "iris": 2,
+    "collarette": 3,
+    "scurf_rim": 4,
+    "contraction_furrows": 5
+  },
+  "overlay": {
+    "alpha": 0.45,
+    "class_colors_bgr": {
+      "0": [0, 0, 0],
+      "1": [255, 255, 0],
+      "2": [0, 255, 0],
+      "3": [255, 0, 255],
+      "4": [0, 128, 255],
+      "5": [0, 0, 255]
+    }
+  },
+  "report": {
+    "enabled": false
+  }
+}
