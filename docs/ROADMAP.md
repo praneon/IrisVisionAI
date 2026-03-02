@@ -46,7 +46,7 @@ Completed in this phase:
 - deterministic extension execution order and status locking
 - reproducibility artifacts per run (`results.json`, `manifest.json`, `session_state.json`)
 - manifest hashing and environment/config snapshot capture
-- data consistency gate (`scripts/check_data_consistency.py`)
+- data consistency gate (`engine.utils.data_consistency.validate_data_consistency`)
 
 Remaining to close this phase:
 - final git-tree cleanup/commit hygiene pass before release tag
@@ -91,5 +91,11 @@ Planned:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 pytest -q engine/tests -p no:cacheprovider
-python3 scripts/check_data_consistency.py
+python3 - <<'PY'
+from engine.utils.data_consistency import validate_data_consistency
+issues = validate_data_consistency('.')
+if issues:
+    raise SystemExit('\n'.join(issues))
+print('PASS data consistency gate')
+PY
 ```
