@@ -35,6 +35,46 @@ This project references the **CASIA-IrisV4** dataset, which:
 
 Users must comply with all dataset licensing and usage requirements.
 
+### 3.1 CASIA-IrisV4 License Notice (Required)
+The CASIA-IrisV4 database is released for research and educational purposes.  
+The CASIA providers hold no liability for undesirable consequences from use of the database.  
+All rights are reserved by CASIA.
+
+Any person or organization is **not permitted** to distribute, publish, copy, or disseminate the database.
+
+In documents and papers reporting results based on CASIA-IrisV4, include acknowledgment such as:
+
+> "Portions of the research in this paper use the CASIA-IrisV4 collected by the Chinese Academy of Sciences' Institute of Automation (CASIA)."
+
+Also include a reference to:
+- `CASIA Iris Image Database, http://biometrics.idealtest.org/`
+
+CASIA requests that public reports/papers using CASIA-IrisV4 be forwarded to:
+
+Professor Tieniu Tan  
+Center for Biometrics and Security Research  
+National Laboratory of Pattern Recognition  
+Institute of Automation, Chinese Academy of Sciences  
+P.O.Box 2728  
+Beijing 100190  
+China
+
+Or send electronic copies to:
+- `znsun@nlpr.ia.ac.cn`
+
+Questions regarding the dataset can be addressed to:
+
+Dr. Zhenan Sun  
+Center for Biometrics and Security Research  
+National Laboratory of Pattern Recognition  
+Institute of Automation, Chinese Academy of Sciences  
+P.O.Box 2728  
+Beijing 100190  
+China  
+Tel: +86 10 8261 0278  
+Fax: +86 10 6255 1993  
+Email: `znsun@nlpr.ia.ac.cn`
+
 ---
 
 ## 4. No Performance Guarantees
