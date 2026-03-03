@@ -8,7 +8,7 @@ A complete scientific pipeline for structural iris analysis using Near-Infrared 
 This repository implements segmentation, micro-feature detection, clock-sector mapping, and interpretation layers (rule-based + VLM).
 
 
-## Current Project Status (March 2026)
+## Current Project Status 
 
 - ✔ Engine runtime hardening track is implemented and running under the unified `engine/` package.
 - ✔ Extension runtime policy is active (execution order lock, timeout handling, dependency checks, namespaced outputs).
@@ -16,71 +16,6 @@ This repository implements segmentation, micro-feature detection, clock-sector m
 - ✔ Validation gates are active: engine tests pass and data consistency checks pass.
 - ⏳ Final repository cleanup/staging pass is pending before release commit.
 - ⏳ Production-scale annotation expansion and training phases remain pending by roadmap.
-
----
-
-## Technical Details (v0.5 Baseline)
-
-### Runtime and API Surface
-- Canonical runtime entrypoint is `engine.run_analysis(input_path, device, config)`.
-- Engine package root is unified under `engine/` with runtime code in `engine/app/`.
-- Output contract includes deterministic artifacts per run:
-  - `results.json`
-  - `manifest.json`
-  - `session_state.json`
-- Manifest includes `engine_api_version`, `manifest_schema_version`, and canonical payload hash.
-
-### Extension Runtime Policy
-- Extension execution order is explicitly locked in `engine/extensions/registry.py`.
-- Extension outputs are namespaced under `AnalysisResult.extensions`.
-- Extension status model is fixed to:
-  - `success`
-  - `skipped`
-  - `timeout`
-  - `failed`
-- Extension failure is isolated; core run can continue with telemetry.
-
-### Data and Reproducibility Baseline
-- Active dataset subset: CASIA-Iris-Interval (NIR).
-- Current metadata baseline:
-  - `2639` images
-  - `249` subjects
-  - `395` eye-classes (subject + eye)
-  - resolution `320x280`, grayscale JPG
-- Split baseline from metadata:
-  - train `1810`
-  - val `383`
-  - test `446`
-
-### Packaging Artifacts (Current)
-- Linux installer artifact:
-  - `projects/packages/v0.5/linux/irisatlas-engine_0.5_alpha_amd64.deb`
-- Windows installer artifact:
-  - `projects/packages/v0.5/windows/irisatlas-engine-0.5-alpha.msi`
-
----
-
-## Repo Sanity Gate (Before Push)
-
-Run these checks from repo root:
-
-```bash
-git status --short
-python3 -m pytest -q engine/tests -p no:cacheprovider
-python3 - <<'__CHECK__'
-from engine.utils.data_consistency import validate_data_consistency
-issues = validate_data_consistency('.')
-if issues:
-    raise SystemExit('\n'.join(issues))
-print('PASS data consistency gate')
-__CHECK__
-```
-
-Sanity pass criteria:
-- Working tree contains only intentional changes.
-- Engine tests pass.
-- Data consistency gate returns no issues.
-- No dataset binaries or runtime artifacts are added to tracked files.
 
 ---
 
